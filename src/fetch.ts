@@ -1,4 +1,5 @@
 import { env } from "./env";
+import { ProductUpdateData } from "./schema";
 
 export async function getProducts() {
   console.log(`Getting all WooCommerce products from ${env.STORE_URL}`);
@@ -33,4 +34,21 @@ async function getProductsPage(page: number, perPage: number) {
       },
     }
   );
+}
+
+export async function updateProduct(id: number, data: ProductUpdateData) {
+  const body = {
+    ...data.basicData,
+  };
+
+  return fetch(`${env.STORE_URL}/wp-json/wc/v3/products/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${btoa(
+        `${env.WP_APPLICATION_USERNAME}:${env.WP_APPLICATION_PASSWORD}`
+      )}`,
+    },
+    body: JSON.stringify(body),
+  });
 }
