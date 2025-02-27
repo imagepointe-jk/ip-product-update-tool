@@ -4,9 +4,10 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "zod": "^3.24.2"
   },
   "scripts": {
-    "start": "npx ts-node run.ts"
+    "start": "npx ts-node src/run.ts"
   }
 }
